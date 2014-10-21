@@ -7,6 +7,7 @@ library ieee;
     
 entity IC74189 is
     port (
+        pX_clk      : in std_logic;
         p1_a0       : in std_logic;
         p2_me       : in std_logic;
         p3_we       : in std_logic;
@@ -36,7 +37,7 @@ architecture behv of IC74189 is
     signal is1, is2, is3, is4 : std_logic := '0';
 begin
     addr <= conv_integer(p1_a0 & p15_a1 & p14_a2 & p13_a3);
-    process (p2_me, p3_we, addr)
+    process (pX_clk)
     begin
         if p2_me = '0' and p3_we = '0' then
             is1 <= 'Z';

@@ -31,10 +31,10 @@ begin
         -- PIN 8 is GND
         p9_g1n      => La,
         p10_g2n     => La,
-        p11_d4      => input(0),
-        p12_d3      => input(1),
-        p13_d2      => input(2),
-        p14_d1      => input(3),
+        p11_d4      => input(4),
+        p12_d3      => input(5),
+        p13_d2      => input(6),
+        p14_d1      => input(7),
         p15_clr     => '0'
         -- PIN 16 is VCC
     );
@@ -51,10 +51,10 @@ begin
         -- PIN 8 is GND
         p9_g1n      => La,
         p10_g2n     => La,
-        p11_d4      => input(7),
-        p12_d3      => input(6),
-        p13_d2      => input(5),
-        p14_d1      => input(4),
+        p11_d4      => input(0),
+        p12_d3      => input(1),
+        p13_d2      => input(2),
+        p14_d1      => input(3),
         p15_clr     => '0'
         -- PIN 16 is VCC
     );
@@ -69,7 +69,7 @@ begin
         p6_y2       => out_bus(1),
         -- PIN 7 is GND
         p8_y3       => out_bus(2),
-        p9_a3       => iq(3),
+        p9_a3       => iq(2),
         p10_c3      => Ea,
         p11_y4      => out_bus(3),
         p12_a4      => iq(3),

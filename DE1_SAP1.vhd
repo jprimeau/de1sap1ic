@@ -90,8 +90,8 @@ begin
     LEDG(1) <= clear_mode;
     LEDG(0) <= not clear_mode;
     
-    --data_disp <= data_port when run_mode = '1' else bus_port;
-    data_disp <= bus_port;
+    data_disp <= data_port when run_mode = '1' else bus_port;
+    --data_disp <= bus_port;
     
     -- Address and data input
     process (KEY(3), SW, addr_mode)

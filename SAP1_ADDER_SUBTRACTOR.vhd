@@ -19,36 +19,36 @@ architecture behv of SAP1_ADDER_SUBTRACTOR is
 begin
     C14 : IC7486
     port map (
-        p1_a1       => input_b(0),
+        p1_a1       => input_b(7),
         p2_b1       => Su,
-        p3_y1       => add_sub_in(0),
-        p4_a2       => input_b(1),
+        p3_y1       => add_sub_in(7),
+        p4_a2       => input_b(6),
         p5_b2       => Su,
-        p6_y2       => add_sub_in(1),
+        p6_y2       => add_sub_in(6),
         -- PIN 7 is GND
-        p8_y3       => add_sub_in(2),
-        p9_a3       => input_b(2),
+        p8_y3       => add_sub_in(5),
+        p9_a3       => input_b(5),
         p10_b3      => Su,
-        p11_y4      => add_sub_in(3),
-        p12_a4      => input_b(3),
+        p11_y4      => add_sub_in(4),
+        p12_a4      => input_b(4),
         p13_b4      => Su
         -- PIN 14 is VCC
     );
     
     C15 : IC7486
     port map (
-        p1_a1       => input_b(4),
+        p1_a1       => input_b(3),
         p2_b1       => Su,
-        p3_y1       => add_sub_in(4),
-        p4_a2       => input_b(5),
+        p3_y1       => add_sub_in(3),
+        p4_a2       => input_b(2),
         p5_b2       => Su,
-        p6_y2       => add_sub_in(5),
+        p6_y2       => add_sub_in(2),
         -- PIN 7 is GND
-        p8_y3       => add_sub_in(6),
-        p9_a3       => input_b(6),
+        p8_y3       => add_sub_in(1),
+        p9_a3       => input_b(1),
         p10_b3      => Su,
-        p11_y4      => add_sub_in(7),
-        p12_a4      => input_b(7),
+        p11_y4      => add_sub_in(0),
+        p12_a4      => input_b(0),
         p13_b4      => Su
         -- PIN 14 is VCC
     );

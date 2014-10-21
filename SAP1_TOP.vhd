@@ -6,36 +6,36 @@ use work.all;
 entity SAP1_TOP is
     port (
         -- BEGIN: SIMULATION ONLY
-        iLDA_out    : out std_logic;
-        iADD_out    : out std_logic;
-        iSUB_out    : out std_logic;
-        iOUT_out    : out std_logic;
-        iHLT_out    : out std_logic;
-        Cp_out      : out std_logic;
-        Ep_out      : out std_logic;
-        Lm_out      : out std_logic;
-        CE_out      : out std_logic;
-        Li_out      : out std_logic;
-        Ei_out      : out std_logic;
-        La_out      : out std_logic;
-        Ea_out      : out std_logic;
-        Su_out      : out std_logic;
-        Eu_out      : out std_logic;
-        Lb_out      : out std_logic;
-        Lo_out      : out std_logic;
-        mar_out     : out std_logic_vector(3 downto 0);
-        mux_out     : out std_logic_vector(3 downto 0);
-        i_reg_out   : out std_logic_vector(3 downto 0);
-        T1_out      : out std_logic;
-        T2_out      : out std_logic;
-        T3_out      : out std_logic;
-        T4_out      : out std_logic;
-        T5_out      : out std_logic;
-        T6_out      : out std_logic;
-        clk_out     : out std_logic;
-        clkn_out    : out std_logic;
-        clr_out     : out std_logic;
-        clrn_out    : out std_logic;
+--        iLDA_out    : out std_logic;
+--        iADD_out    : out std_logic;
+--        iSUB_out    : out std_logic;
+--        iOUT_out    : out std_logic;
+--        iHLT_out    : out std_logic;
+--        Cp_out      : out std_logic;
+--        Ep_out      : out std_logic;
+--        Lm_out      : out std_logic;
+--        CE_out      : out std_logic;
+--        Li_out      : out std_logic;
+--        Ei_out      : out std_logic;
+--        La_out      : out std_logic;
+--        Ea_out      : out std_logic;
+--        Su_out      : out std_logic;
+--        Eu_out      : out std_logic;
+--        Lb_out      : out std_logic;
+--        Lo_out      : out std_logic;
+--        mar_out     : out std_logic_vector(3 downto 0);
+--        mux_out     : out std_logic_vector(3 downto 0);
+--        i_reg_out   : out std_logic_vector(3 downto 0);
+--        T1_out      : out std_logic;
+--        T2_out      : out std_logic;
+--        T3_out      : out std_logic;
+--        T4_out      : out std_logic;
+--        T5_out      : out std_logic;
+--        T6_out      : out std_logic;
+--        clk_out     : out std_logic;
+--        clkn_out    : out std_logic;
+--        clr_out     : out std_logic;
+--        clrn_out    : out std_logic;
         -- END: SIMULATION ONLY
     
         clock       : in std_logic;
@@ -96,36 +96,36 @@ begin
     bus_out <= w_bus;
     
     -- BEGIN: SIMULATION ONLY
-    iLDA_out <= iLDA;
-    iADD_out <= iADD;
-    iSUB_out <= iSUB;
-    iOUT_out <= iOUT;
-    iHLT_out <= iHLT;
-    Cp_out <= Cp;
-    Ep_out <= Ep;
-    Lm_out <= Lm;
-    CE_out <= CE;
-    Li_out <= Li;
-    Ei_out <= Ei;
-    La_out <= La;
-    Ea_out <= Ea;
-    Su_out <= Su;
-    Eu_out <= Eu;
-    Lb_out <= Lb;
-    Lo_out <= Lo;
-    mar_out <= mar;
-    mux_out <= mux;
-    i_reg_out <= i_reg;
-    T1_out <= T1;
-    T2_out <= T2;
-    T3_out <= T3;
-    T4_out <= T4;
-    T5_out <= T5;
-    T6_out <= T6;
-    clk_out <= clk;
-    clkn_out <= clkn;
-    clr_out <= clr;
-    clrn_out <= clrn;
+--    iLDA_out <= iLDA;
+--    iADD_out <= iADD;
+--    iSUB_out <= iSUB;
+--    iOUT_out <= iOUT;
+--    iHLT_out <= iHLT;
+--    Cp_out <= Cp;
+--    Ep_out <= Ep;
+--    Lm_out <= Lm;
+--    CE_out <= CE;
+--    Li_out <= Li;
+--    Ei_out <= Ei;
+--    La_out <= La;
+--    Ea_out <= Ea;
+--    Su_out <= Su;
+--    Eu_out <= Eu;
+--    Lb_out <= Lb;
+--    Lo_out <= Lo;
+--    mar_out <= mar;
+--    mux_out <= mux;
+--    i_reg_out <= i_reg;
+--    T1_out <= T1;
+--    T2_out <= T2;
+--    T3_out <= T3;
+--    T4_out <= T4;
+--    T5_out <= T5;
+--    T6_out <= T6;
+--    clk_out <= clk;
+--    clkn_out <= clkn;
+--    clr_out <= clr;
+--    clrn_out <= clrn;
     -- END: SIMULATION ONLY
 
     PROMGRAM_COUNTER : SAP1_PROGRAM_COUNTER
@@ -155,58 +155,59 @@ begin
     
     RAM : SAP1_16X8RAM
     port map (
+        clock       => clk,
         addr        => mux,
         data        => data,
         me          => CE,
-        we          => not (store and run),
+        we          => not store,
         sense       => w_bus
     );
     
---    INSTRUCTION_REGISTER : SAP1_INSTRUCTION_REGISTER
---    port map (
---        input       => w_bus,
---        clk         => clk,
---        clr         => clr,
---        Li          => Li,
---        Ei          => Ei,
---        out_inst    => i_reg,
---        out_bus     => w_bus(3 downto 0)
---    );
+    INSTRUCTION_REGISTER : SAP1_INSTRUCTION_REGISTER
+    port map (
+        input       => w_bus,
+        clk         => clk,
+        clr         => clr,
+        Li          => Li,
+        Ei          => Ei,
+        out_inst    => i_reg,
+        out_bus     => w_bus(3 downto 0)
+    );
     
---    ACCUMULATOR : SAP1_ACCUMULATOR
---    port map (
---        input       => w_bus,
---        clk         => clk,
---        La          => La,
---        Ea          => Ea,
---        out_add_sub => acc_out,
---        out_bus     => w_bus
---    );
---    
---    ADD_SUB : SAP1_ADDER_SUBTRACTOR
---    port map (
---        input_a     => acc,
---        input_b     => b_reg,
---        Su          => Eu,
---        Eu          => Su,
---        output      => w_bus
---    );
---    
---    B_REG : SAP1_B_REGISTER
---    port map (
---        input       => w_bus,
---        clk         => clk,
---        Lb          => Lb,
---        output      => b_reg
---    );
---    
---    OUTPUT_REG : SAP1_OUTPUT_REGISTER
---    port map (
---        input       => w_bus,
---        clk         => clk,
---        Lo          => Lo,
---        output      => data_out
---    );
+    ACCUMULATOR : SAP1_ACCUMULATOR
+    port map (
+        input       => w_bus,
+        clk         => clk,
+        La          => La,
+        Ea          => Ea,
+        out_add_sub => acc,
+        out_bus     => w_bus
+    );
+    
+    ADD_SUB : SAP1_ADDER_SUBTRACTOR
+    port map (
+        input_a     => acc,
+        input_b     => b_reg,
+        Eu          => Eu,
+        Su          => Su,
+        output      => w_bus
+    );
+    
+    B_REGISTER : SAP1_B_REGISTER
+    port map (
+        input       => w_bus,
+        clk         => clk,
+        Lb          => Lb,
+        output      => b_reg
+    );
+    
+    OUTPUT_REGISTER : SAP1_OUTPUT_REGISTER
+    port map (
+        input       => w_bus,
+        clk         => clk,
+        Lo          => Lo,
+        output      => data_out
+    );
     
     PANEL : SAP1_PANEL
     port map (
@@ -221,15 +222,15 @@ begin
         clkn        => clkn
     );
     
---    I_DECODER : SAP1_INSTRUCTION_DECODER
---    port map (
---        i           => i_reg,
---        iLDA        => iLDA,
---        iADD        => iADD,
---        iSUB        => iSUB,
---        iOUT        => iOUT,
---        iHLT        => iHLT
---    );
+    I_DECODER : SAP1_INSTRUCTION_DECODER
+    port map (
+        i           => i_reg,
+        iLDA        => iLDA,
+        iADD        => iADD,
+        iSUB        => iSUB,
+        iOUT        => iOUT,
+        iHLT        => iHLT
+    );
     
     RC : SAP1_RING_COUNTER
     port map (

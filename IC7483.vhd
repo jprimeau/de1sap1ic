@@ -26,9 +26,9 @@ entity IC7483 is
 end IC7483;
 
 architecture behv of IC7483 is
-    signal c1, c2, c3, c4 : std_logic;
+    signal c1, c2, c3 : std_logic;
 begin
-    c1     <= (p10_a1 and p11_b1) or (p10_a1 and p11_b1) or (p11_b1 and p13_c0);
+    c1     <= (p10_a1 and p11_b1) or (p10_a1 and p13_c0) or (p11_b1 and p13_c0);
     c2     <= (p8_a2  and p7_b2)  or (p8_a2  and c1)     or (p7_b2 and c1);
     c3     <= (p3_a3  and p4_b3)  or (p3_a3  and c2)     or (p4_b3  and c2);
     p14_c4 <= (p1_a4  and p16_b4) or (p1_a4  and c3)     or (p16_b4 and c3);
