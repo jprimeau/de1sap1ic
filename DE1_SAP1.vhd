@@ -60,7 +60,6 @@ architecture rtl of DE1_SAP1 is
     signal auto_mode    : std_logic := '0';
     signal man_mode     : std_logic := '0';
     signal step         : std_logic := '0';
-    signal read_mode    : std_logic := '0';
     signal store_mode   : std_logic := '0';
     signal start_mode   : std_logic := '0';
     signal clear_mode   : std_logic := '1';
@@ -81,7 +80,6 @@ begin
     LEDG(6) <= not addr_mode;
     
     store_mode <= not KEY(2);
-    read_mode <= not store_mode;
     LEDG(5) <= store_mode;
     LEDG(4) <= store_mode;
     
@@ -171,7 +169,7 @@ begin
         step        => step,
         manual      => man_mode,
         run         => run_mode,
-        read        => read_mode,
+        store       => store_mode,
         addr_out    => addr_port,
         data_out    => data_port,
         bus_out     => bus_port

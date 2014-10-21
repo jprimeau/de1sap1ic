@@ -45,7 +45,7 @@ entity SAP1_TOP is
         step        : in std_logic;
         manual      : in std_logic;
         run         : in std_logic;
-        read        : in std_logic;
+        store       : in std_logic;
         addr_out    : out std_logic_vector(3 downto 0);
         data_out    : out std_logic_vector(7 downto 0);
         bus_out     : out std_logic_vector(7 downto 0)
@@ -128,37 +128,37 @@ begin
     clrn_out <= clrn;
     -- END: SIMULATION ONLY
 
---    PROMGRAM_COUNTER : SAP1_PROGRAM_COUNTER
---    port map (
---        clkn        => clkn,
---        clrn        => clrn,
---        cp          => Cp,
---        ep          => Ep and run,
---        q           => w_bus(3 downto 0)
---    );
+    PROMGRAM_COUNTER : SAP1_PROGRAM_COUNTER
+    port map (
+        clkn        => clkn,
+        clrn        => clrn,
+        cp          => Cp,
+        ep          => Ep and run,
+        q           => w_bus(3 downto 0)
+    );
     
---    MEMORY_ADDRESS_REGISTER : SAP1_MAR
---    port map (
---        input       => w_bus(3 downto 0),
---        clk         => clk,
---        Lm          => Lm,
---        output      => mar
---    );
---    
---    MULTIPLEXER : SAP1_2TO1_MULTIPLEXER
---    port map (
---        sel         => run,
---        input_a     => adress,
---        input_b     => mar,
---        output      => mux
---    );
+    MEMORY_ADDRESS_REGISTER : SAP1_MAR
+    port map (
+        input       => w_bus(3 downto 0),
+        clk         => clk,
+        Lm          => Lm,
+        output      => mar
+    );
+    
+    MULTIPLEXER : SAP1_2TO1_MULTIPLEXER
+    port map (
+        sel         => run,
+        input_a     => adress,
+        input_b     => mar,
+        output      => mux
+    );
     
     RAM : SAP1_16X8RAM
     port map (
         addr        => mux,
         data        => data,
-        me          => '0',
-        we          => '1',
+        me          => CE,
+        we          => not (store and run),
         sense       => w_bus
     );
     
