@@ -6,7 +6,7 @@
 -- 
 -- SW[9] -> PROG/RUN
 -- SW[8] -> MAN/AUTO
--- SW[7] ->    D7
+-- SW[7] -> LOAD PROGRAM/D7
 -- SW[6] ->    D6
 -- SW[5] ->    D5
 -- SW[4] ->    D4
@@ -60,6 +60,7 @@ architecture rtl of DE1_SAP1 is
     signal auto_mode    : std_logic := '0';
     signal man_mode     : std_logic := '0';
     signal step         : std_logic := '0';
+    signal ld_pgm       : std_logic := '0';
     signal store_mode   : std_logic := '0';
     signal start_mode   : std_logic := '0';
     signal clear_mode   : std_logic := '1';
@@ -91,7 +92,6 @@ begin
     LEDG(0) <= not clear_mode;
     
     data_disp <= data_port when run_mode = '1' else bus_port;
-    --data_disp <= bus_port;
     
     -- Address and data input
     process (KEY(3), SW, addr_mode)
@@ -103,9 +103,11 @@ begin
         if addr_mode = '1' then
             -- Adress mode active: store address
             panel_addr <= SW(3 downto 0);
+            ld_pgm <= SW(7);
         else
             -- Data mode active: store data
             panel_data <= SW(7 downto 0);
+            ld_pgm <= '0';
         end if;
     end process;
     
@@ -168,6 +170,7 @@ begin
         start       => start_mode,
         step        => step,
         manual      => man_mode,
+        ld_pgm      => ld_pgm,
         run         => run_mode,
         store       => store_mode,
         addr_out    => addr_port,

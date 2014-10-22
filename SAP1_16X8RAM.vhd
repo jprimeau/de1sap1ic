@@ -6,6 +6,7 @@ library ieee;
 
 entity SAP1_16X8RAM is
     port (
+        ld_pgm      : in std_logic;
         clock       : in std_logic;
         addr        : in std_logic_vector(3 downto 0);
         data        : in std_logic_vector(7 downto 0);
@@ -17,10 +18,11 @@ end SAP1_16X8RAM;
 
 architecture behv of SAP1_16X8RAM is
     type t_ram is array (0 to 15) of std_logic_vector(7 downto 0);
-    signal ram : t_ram := (
-        x"09", x"EF", x"1A", x"EF", x"1B", x"2C", x"EF", x"FF",
-        x"FF", x"05", x"07", x"03", x"04", x"FF", x"FF", x"FF"
-    );
+    signal ram : t_ram;
+--    signal ram : t_ram := (
+--        x"09", x"EF", x"1A", x"EF", x"1B", x"2C", x"EF", x"FF",
+--        x"FF", x"05", x"07", x"03", x"04", x"FF", x"FF", x"FF"
+--    );
 begin
     process (clock, me, ram, addr)
     begin
@@ -31,13 +33,27 @@ begin
         end if;
     end process;
 
---    process (clock, we, data, addr)
---    begin
---        if we = '0' then
---            ram(conv_integer(addr)) <= data;
---            sense <= (others=>'Z');
---        end if;
---    end process;
+    process (clock, we, data, addr)
+    begin
+        if we = '0' then
+            if ld_pgm = '0' then
+                ram(conv_integer(addr)) <= data;
+                sense <= (others=>'Z');
+            else
+                if addr = x"0" then
+                    ram <= (
+                        x"09", x"EF", x"1A", x"EF", x"1B", x"2C", x"EF", x"FF",
+                        x"FF", x"05", x"07", x"03", x"04", x"FF", x"FF", x"FF"
+                    );
+                elsif addr = x"1" then
+                    ram <= (
+                        x"0F", x"EF", x"0E", x"EF", x"0D", x"EF", x"0C", x"EF",
+                        x"0B", x"EF", x"FF", x"10", x"08", x"04", x"02", x"01"
+                    );
+                end if;
+            end if;
+        end if;
+    end process;
 
 --    C6 : IC74189
 --    port map (
