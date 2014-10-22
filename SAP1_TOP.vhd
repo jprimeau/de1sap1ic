@@ -157,7 +157,7 @@ begin
     RAM : SAP1_16X8RAM
     port map (
         ld_pgm      => ld_pgm,
-        clock       => clk,
+--        clock       => clk,
         addr        => mux,
         data        => data,
         me          => CE,
