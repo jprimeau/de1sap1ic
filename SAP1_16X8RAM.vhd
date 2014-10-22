@@ -18,7 +18,7 @@ end SAP1_16X8RAM;
 architecture behv of SAP1_16X8RAM is
     type t_ram is array (0 to 15) of std_logic_vector(7 downto 0);
     signal ram : t_ram := (
-        x"09", x"EF", x"1A", x"EF",  x"1B", x"2C", x"EF", x"FF",
+        x"09", x"EF", x"1A", x"EF", x"1B", x"2C", x"EF", x"FF",
         x"FF", x"05", x"07", x"03", x"04", x"FF", x"FF", x"FF"
     );
 begin
