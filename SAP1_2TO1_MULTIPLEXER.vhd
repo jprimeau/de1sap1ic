@@ -1,3 +1,6 @@
+-- DESCRIPTION: SAP-1 2 TO 1 MULTIPLEXER
+-- AUTHOR: Jonathan Primeau
+
 library ieee;
     use ieee.std_logic_1164.all;
     

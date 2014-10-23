@@ -1,4 +1,4 @@
--- DESCRIPTION: 7410 Dual 4-Input NAND Gates
+-- DESCRIPTION: 7410 Dual 4-Input NAND Gate
 -- AUTHOR: Jonathan Primeau
 
 library ieee;

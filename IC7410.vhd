@@ -1,4 +1,4 @@
--- DESCRIPTION: 7410 Triple 3-Input NAND Gates
+-- DESCRIPTION: 7410 Triple 3-Input NAND Gate
 -- AUTHOR: Jonathan Primeau
 
 library ieee;

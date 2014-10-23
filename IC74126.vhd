@@ -1,3 +1,6 @@
+-- DESCRIPTION: 74126 Quad Bus Buffer Tri-State
+-- AUTHOR: Jonathan Primeau
+
 library ieee;
     use ieee.std_logic_1164.all;
     

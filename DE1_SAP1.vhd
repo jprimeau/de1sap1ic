@@ -50,7 +50,6 @@ architecture rtl of DE1_SAP1 is
     signal clock        : std_logic;
     signal counter      : std_logic_vector(25 downto 0);
 
-    signal halt         : std_logic;
     signal addr_port    : std_logic_vector(3 downto 0);
     signal data_port    : std_logic_vector(7 downto 0);
     signal bus_port     : std_logic_vector(7 downto 0);
@@ -66,12 +65,14 @@ architecture rtl of DE1_SAP1 is
     signal clear_mode   : std_logic := '1';
     signal addr_mode    : std_logic := '1';
     
+    signal halt         : std_logic := '0';
+    
     signal panel_addr   : std_logic_vector(3 downto 0) := (others=>'0');
     signal panel_data   : std_logic_vector(7 downto 0) := (others=>'0');
 
 begin
     LEDR <= SW;
-    HEX2 <= (others => '1');
+    HEX2 <= (others => '1') when halt = '0' else "1001000";
 
     run_mode <= SW(9);
     auto_mode <= SW(8);
@@ -85,8 +86,8 @@ begin
     LEDG(4) <= store_mode;
     
     step <= not KEY(1);
-    LEDG(3) <= clock when auto_mode = '1' and run_mode = '1' else step;
-    LEDG(2) <= clock when auto_mode = '1' and run_mode = '1' else step;
+    LEDG(3) <= clock when auto_mode = '1' and run_mode = '1' and halt = '0' else step;
+    LEDG(2) <= clock when auto_mode = '1' and run_mode = '1' and halt = '0' else step;
     
     LEDG(1) <= clear_mode;
     LEDG(0) <= not clear_mode;
@@ -164,7 +165,7 @@ begin
 
     SAP1: entity work.SAP1_TOP
     port map (
-        clock       => clock,
+        clock       => clock and not halt,
         adress      => panel_addr,
         data        => panel_data,
         start       => start_mode,
@@ -175,7 +176,8 @@ begin
         store       => store_mode,
         addr_out    => addr_port,
         data_out    => data_port,
-        bus_out     => bus_port
+        bus_out     => bus_port,
+        halt_out    => halt
     );
 
 end architecture rtl;

@@ -1,3 +1,6 @@
+-- DESCRIPTION: SAP-1 OUTPUT REGISTER
+-- AUTHOR: Jonathan Primeau
+
 library ieee;
     use ieee.std_logic_1164.all;
     
@@ -7,6 +10,7 @@ entity SAP1_OUTPUT_REGISTER is
     port (
         input       : in std_logic_vector(7 downto 0);
         clk         : in std_logic;
+        clr         : in std_logic;
         Lo          : in std_logic;
         output      : out std_logic_vector(7 downto 0)
     );
@@ -30,7 +34,7 @@ begin
         p12_d3      => input(5),
         p13_d2      => input(6),
         p14_d1      => input(7),
-        p15_clr     => '0'
+        p15_clr     => clr -- * Not in original design, should be: '0'
         -- PIN 16 is VCC
     );
     
@@ -50,7 +54,7 @@ begin
         p12_d3      => input(1),
         p13_d2      => input(2),
         p14_d1      => input(3),
-        p15_clr     => '0'
+        p15_clr     => clr -- * Not in original design, should be: '0'
         -- PIN 16 is VCC
     );
 

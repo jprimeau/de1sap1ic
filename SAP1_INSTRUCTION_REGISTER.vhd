@@ -1,3 +1,6 @@
+-- DESCRIPTION: SAP-1 INSTRUCTION REGISTER
+-- AUTHOR: Jonathan Primeau
+
 library ieee;
     use ieee.std_logic_1164.all;
     

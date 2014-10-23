@@ -1,3 +1,6 @@
+-- DESCRIPTION: SAP-1 16x8 RAM
+-- AUTHOR: Jonathan Primeau
+
 library ieee;
     use ieee.std_logic_1164.all;
     use ieee.std_logic_unsigned.all;
@@ -7,7 +10,6 @@ library ieee;
 entity SAP1_16X8RAM is
     port (
         ld_pgm      : in std_logic;
-        --clock       : in std_logic;
         addr        : in std_logic_vector(3 downto 0);
         data        : in std_logic_vector(7 downto 0);
         me          : in std_logic;
@@ -36,14 +38,19 @@ begin
                 ram(conv_integer(addr)) <= data;
             else
                 if addr = x"0" then
-                    ram <= (
+                    ram <= ( -- 5 + 7 + 3 - 4 = 11 -> 05 0C 0B
                         x"09", x"EF", x"1A", x"EF", x"1B", x"2C", x"EF", x"FF",
                         x"FF", x"05", x"07", x"03", x"04", x"FF", x"FF", x"FF"
                     );
                 elsif addr = x"1" then
-                    ram <= (
+                    ram <= ( -- -> 01 02 04 08 10
                         x"0F", x"EF", x"0E", x"EF", x"0D", x"EF", x"0C", x"EF",
                         x"0B", x"EF", x"FF", x"10", x"08", x"04", x"02", x"01"
+                    );
+                elsif addr = x"2" then
+                    ram <= ( -- 5 - 10 = -5 -> FB
+                        x"0F", x"2E", x"EF", x"FF", x"FF", x"FF", x"FF", x"FF",
+                        x"FF", x"FF", x"FF", x"FF", x"FF", x"FF", x"0A", x"05"
                     );
                 end if;
             end if;

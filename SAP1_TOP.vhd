@@ -49,7 +49,8 @@ entity SAP1_TOP is
         store       : in std_logic;
         addr_out    : out std_logic_vector(3 downto 0);
         data_out    : out std_logic_vector(7 downto 0);
-        bus_out     : out std_logic_vector(7 downto 0)
+        bus_out     : out std_logic_vector(7 downto 0);
+        halt_out    : out std_logic
     );
 end SAP1_TOP;
 
@@ -95,6 +96,7 @@ architecture behv of SAP1_TOP is
 begin
     addr_out <= mux;
     bus_out <= w_bus;
+    halt_out <= not iHLT;
     
     -- BEGIN: SIMULATION ONLY
     iLDA_out <= iLDA;
@@ -134,7 +136,7 @@ begin
         clkn        => clkn,
         clrn        => clrn,
         cp          => Cp,
-        ep          => Ep and run,
+        ep          => Ep and run, -- * Not in original design, should be: Ep,
         q           => w_bus(3 downto 0)
     );
     
@@ -157,10 +159,9 @@ begin
     RAM : SAP1_16X8RAM
     port map (
         ld_pgm      => ld_pgm,
---        clock       => clk,
         addr        => mux,
         data        => data,
-        me          => CE,
+        me          => CE and run, -- * Not in original design, should be: CE,
         we          => not store,
         sense       => w_bus
     );
@@ -207,6 +208,7 @@ begin
     port map (
         input       => w_bus,
         clk         => clk,
+        clr         => clr,
         Lo          => Lo,
         output      => data_out
     );

@@ -1,4 +1,4 @@
--- DESCRIPTION: 7486 Quad 2-input XOR gates
+-- DESCRIPTION: 7486 Quad EXCLUSIVE-OR Gate
 -- AUTHOR: Jonathan Primeau
 
 library ieee;

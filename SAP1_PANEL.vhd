@@ -1,3 +1,6 @@
+-- DESCRIPTION: SAP-1 PANEL
+-- AUTHOR: Jonathan Primeau
+
 library ieee;
     use ieee.std_logic_1164.all;
     
@@ -28,8 +31,8 @@ begin
     iclrn  <= c24y1;
     clrn <= iclrn;
     clr <= c24y2;
-    clk  <= c27y2;
-    clkn <= c27y3;
+    clk  <= clock; -- * Not in original design, should be: clk  <= c27y2;
+    clkn <= not clock; -- * Not in original design, should be: clkn <= c27y3;
     
     C24 : IC7400 -- CLEAR/START & SINGLE STEP
     port map (

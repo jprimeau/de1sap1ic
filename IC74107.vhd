@@ -1,3 +1,6 @@
+-- DESCRIPTION: 74107 Dual J-K Flip-Flop with Clear
+-- AUTHOR: Jonathan Primeau
+
 library ieee;
     use ieee.std_logic_1164.all;
     
