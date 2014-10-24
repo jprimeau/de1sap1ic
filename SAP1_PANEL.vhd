@@ -31,8 +31,8 @@ begin
     iclrn  <= c24y1;
     clrn <= iclrn;
     clr <= c24y2;
-    clk  <= clock; -- * Not in original design, should be: clk  <= c27y2;
-    clkn <= not clock; -- * Not in original design, should be: clkn <= c27y3;
+    clk  <= clock and halt; -- * Not in original design, should be: clk  <= c27y2;
+    clkn <= not clock and halt; -- * Not in original design, should be: clkn <= c27y3;
     
     C24 : IC7400 -- CLEAR/START & SINGLE STEP
     port map (
